@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% block content %}
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'styles/main.css' %}" />
+    <title>Movie List</title>
+</head>
+<body>
+    
+</body>
+</html><h1 class="title">Movie Watchlist</h1>
+<div class="gallery">
+  {% for movie in movies %}
+  <a href="{% url 'movie_detail' movie.pk %}">
+    <div class="card">
+      <div class="card-image">
+        <figure class="image is-square">
+          <img src="{{movie.img}}" alt="{{movie.title}}" />
+        </figure>
+      </div>
+      <div class="card-header">
+        
+      </div>
+      <ul>
+        <!-- <li><img src="{{movie.img}}"alt="movie"></li> -->
+      </ul>
+    </div>
+  </a>
+	{% empty %}
+  <article class="message">
+    <div class="message-header">
+    </div>
+    <a class="button is-dark" href="{% url 'movie_create' %}">Add a Movie</a>
+    <div class="detail__songs mb-5">
+        <h3 class="title is-3">Songs</h3>
+    
+        {% for director in movie.directors.all %}
+        <div class="song">
+          <span>{{forloop.counter}}</span>
+          <span><b>{{director.name}}</b></span>
+          <span>{{director.age}}</span>
+          <span>{{director.img}}</span>
+        </div>
+            {% empty %}
+        <article class="message">
+          <div class="message-header">
+          
+          </div>
+        </article>
+    
+        {% endfor %}
+      </div>
+  </article>
+  {% endfor %}
+  
+</div>
+{% endblock %}

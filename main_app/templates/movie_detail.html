@@ -1,0 +1,106 @@
+{% extends 'base.html' %} 
+{% block content %}
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'styles/main.css' %}" />
+    <title>Watchlist</title>
+</head>
+<body>
+
+ 
+    
+    <button><a href="{% url 'movie_update' movie.pk %}" class="button is-info"> Edit</button>
+   <button><a href="{% url 'movie_delete' movie.pk %}" class="button is-danger">Delete</button> 
+    <div class="detail__img">
+        <img src="{{movie.img}}" alt="{{movie.name}}" />
+    </div>
+    <div class="detail__name">
+        <div class="icon-text">
+            <span class="icon has-text-info">
+                <i class="fas fa-check-circle"></i>
+            </span>
+            
+        </div>
+
+        <h1 class="title">{{movie.title}}</h1>
+    </div>
+    <div class="detail__container">
+        <div class="buttons">
+           
+                <span class="icon">
+                    <i class="fas fa-edit"></i>
+                </span>
+            </a>
+         
+                <span class="icon">
+                    <i class="fas fa-trash-alt"></i>
+                </span>
+            </a>
+        </div>
+     
+    </div>
+    <div class="detail__songs mb-5">
+        <h3 class="title is-3">
+       
+      </div>
+      <form class="mb-5" action="{% url 'director_create' movie.pk %}" method="post">
+        {% csrf_token %}
+        <div class="field has-addons">
+            <div class="control">
+                <input
+                    class="input"
+                    type="text"
+                    name="name"
+                    placeholder="Director"
+                    required
+                />
+            </div>
+            <div class="control">
+                <input
+                    class="input"
+                    type="text"
+                    name="age"
+                    placeholder="age"
+                    required
+                />
+            </div> <div class="control">
+                <input
+                    class="input"
+                    type="text"
+                    name="img"
+                    placeholder="Image"
+                    required
+                />
+            </div>
+            <div class="control">
+                <input class="buttons" type="submit" value="Add Director" />
+            </div>
+        </div>
+    </form>
+    <div class="detail__songs mb-5">
+        <h3 class="title is-3">Director</h3>
+    
+        {% for director in movie.directors.all %}
+        <div class="director">
+          <span>{{forloop.counter}}</span>
+          <span><b>{{director.name}}</b></span>
+          {{director.age}}
+        </div>
+        {% empty %}
+        <article class="message">
+          <div class="message-header">
+          </div>
+        </article>
+    
+        {% endfor %}
+      </div>
+    <!-- before the for loop for songs -->
+
+</body>
+</html>
+{% endblock %}
