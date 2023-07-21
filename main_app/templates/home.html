@@ -13,7 +13,9 @@
     <body>
      
         <h1 class="mo">Welcome to your Movie Watchlist</h1>
+        {% if user.is_authenticated %}
         <a class="button is-dark" href="{% url 'movie_create' %}">Add a Movie</a>
+        {% endif %}
      
     </body>
 </html>
