@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-class Movie(models.Model):
+class Movie(models.Model): #JO -< WO
 
     title = models.CharField(max_length=100)
     img = models.CharField(max_length=250)
@@ -12,7 +12,7 @@ class Movie(models.Model):
     class Meta:
         ordering = ['title']
 
-class Director(models.Model):
+class Director(models.Model): #WO
 
     name= models.CharField(max_length=150)
     age = models.CharField(max_length=250)
